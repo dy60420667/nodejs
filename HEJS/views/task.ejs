@@ -1,0 +1,122 @@
+<% include header.html %>
+<script  src="/javascripts/jquery-3.1.1.js"></script>
+<script  src="/javascripts/jquery.validate.js"></script>
+<script  src="/javascripts/messages_zh.js"></script>
+<script>
+	var image = "";
+	function selectImage(file){	
+		console.log(file.value);
+		
+		if(!file.files||!file.files[0]){
+			return;
+		}
+		var reader = new FileReader();
+		reader.onload = function(evt){
+			document.getElementById("image").src = evt.target.result;
+			image = evt.target.result;
+		}
+		reader.readAsDataURL(file.files[0]);
+	}
+</script>
+<script>
+	$().ready(function() {
+	// 在键盘按下并释放及提交后验证提交表单
+	  $("#addTaskForm").validate({
+	    rules: {
+	      appname:"required",
+	      package: {
+	        required: true,
+	        minlength: 5
+	      },
+	      icon:"required"
+	    },
+	    messages: {
+	      appname: "请输入应用名",
+	      package: {
+	      	required:"请输入包名",
+	      	minlength:"你输入的包名太短"
+	      },
+	      icon:"请选择图标"
+	    }
+	  });
+	});
+</script>
+<style>
+.error{
+	color:red;
+}
+</style>
+<div class="container">
+      <div class="starter-template">
+
+	      <div id="header">
+	        <h1>欢迎使用<%= title %></h1>
+	      </div>
+
+	      <div id="page-header">
+	      	<div id="breadcrumb">
+	          <p>
+	      	    <a href="task/about">&lt;&lt; 关于定制服务</a>
+	      	  </p>
+	      	</div>
+	      	<h2>DEPRECATED: Consider using <a href="http://developer.android.com/reference/android/widget/Toolbar.html">Toolbar</a> or its <a href="http://developer.android.com/reference/android/support/v7/widget/Toolbar.html">support library equivalent</a>.</h2>
+	        <p id="page-intro">
+	          The <strong>Android Action Bar Style Generator</strong> allows you to easily create a simple, 
+	          attractive and seamless custom action bar style for your Android application. It will generate
+	          all necessary nine patch assets plus associated XML drawables and styles which you can copy straight 
+	          into your project.
+	        </p>
+	        
+	      </div>
+
+	      <div id="inputs">			
+				<form role="taskform"  id="addTaskForm" action="task/addTask" method="post">
+				<div class="form-field-outer">
+					<label for="_frm-iconform-name">应用名</label>
+					<div class="form-field-container">
+						<input name="appname" placeholder="请输入应用名称" class="form-text ui-widget ui-widget-content ui-autocomplete-input ui-corner-all" type="text">
+					</div>
+					<div class="form-field-help-text">
+						用户显示在前台的名称
+						Used as name suffix when generating resources. No spaces or punctuation.
+					</div>
+				</div>				
+				<div class="form-field-outer">
+					<label for="_frm-iconform-name">包名</label>
+					<div class="form-field-container">
+						<input name="package" placeholder="package" class="form-text ui-widget ui-widget-content ui-autocomplete-input ui-corner-all" type="text">
+					</div>
+					<div class="form-field-help-text">
+						客户端唯一标识
+						Used as name suffix when generating resources. No spaces or punctuation.
+					</div>
+				</div>
+				<div class="form-field-outer">
+					<label for="_frm-iconform-name">图标</label>
+				    <input type="file" name="icon" onchange="selectImage(this)"  accept="image/*">
+				    <img src="/images/icon_default.png" name="image" id="image" border=0 id="img"/>
+				    <p class="help-block">应用的图标Example block-level help text here.</p>
+				</div>
+				<div class="form-field-outer">
+					<label for="_frm-iconform-name">是否支持第三方登录</label>
+				    <input type="checkbox" name ="ishare">
+				    <p class="help-block">应用的图标Example block-level help text here.</p>
+				</div>
+				<div class="form-field-outer">
+					<label for="_frm-iconform-name">应用介绍</label>
+					<div class="form-field-container">
+						<textarea name="intro" placeholder="应用介绍" class="form-text ui-widget ui-widget-content ui-autocomplete-input ui-corner-all" type="text" style="height:60px;width:400px;vertical-align:text-top"></textarea>
+					</div>
+					<div class="form-field-help-text">
+						应用介绍
+						Used as name suffix when generating resources. No spaces or punctuation.
+					</div>
+				</div>
+				<div class="form-field-outer">
+					<button type="submit" class="dragout form-button"  >确定</button>
+				</div>
+				</form>
+		  </div>
+      </div>
+</div><!-- /.container --> 
+<% include foot.html %>
