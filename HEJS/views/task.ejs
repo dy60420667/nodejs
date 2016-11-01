@@ -28,7 +28,7 @@
 	        required: true,
 	        minlength: 5
 	      },
-	      icon:"required"
+	      upload:"required"
 	    },
 	    messages: {
 	      appname: "请输入应用名",
@@ -36,7 +36,7 @@
 	      	required:"请输入包名",
 	      	minlength:"你输入的包名太短"
 	      },
-	      icon:"请选择图标"
+	      upload:"请选择图标"
 	    }
 	  });
 	});
@@ -70,11 +70,11 @@
 	      </div>
 
 	      <div id="inputs">			
-				<form role="taskform"  id="addTaskForm" action="task/addTask" method="post">
+				<form role="form"  id="addTaskForm" action="task/addTask" method="post">
 				<div class="form-field-outer">
 					<label for="_frm-iconform-name">应用名</label>
 					<div class="form-field-container">
-						<input name="appname" placeholder="请输入应用名称" class="form-text ui-widget ui-widget-content ui-autocomplete-input ui-corner-all" type="text">
+						<input id="appname" name="appname" placeholder="请输入应用名称" class="form-text ui-widget ui-widget-content ui-autocomplete-input ui-corner-all" type="text">
 					</div>
 					<div class="form-field-help-text">
 						用户显示在前台的名称
@@ -84,7 +84,7 @@
 				<div class="form-field-outer">
 					<label for="_frm-iconform-name">包名</label>
 					<div class="form-field-container">
-						<input name="package" placeholder="package" class="form-text ui-widget ui-widget-content ui-autocomplete-input ui-corner-all" type="text">
+						<input id="package" name="package" placeholder="package" class="form-text ui-widget ui-widget-content ui-autocomplete-input ui-corner-all" type="text">
 					</div>
 					<div class="form-field-help-text">
 						客户端唯一标识
@@ -93,19 +93,19 @@
 				</div>
 				<div class="form-field-outer">
 					<label for="_frm-iconform-name">图标</label>
-				    <input type="file" name="icon" onchange="selectImage(this)"  accept="image/*">
+				    <input type="file" name="upload" id="upload" onchange="selectImage(this)"  accept="image/*" multiple="multiple">
 				    <img src="/images/icon_default.png" name="image" id="image" border=0 id="img"/>
 				    <p class="help-block">应用的图标Example block-level help text here.</p>
 				</div>
 				<div class="form-field-outer">
 					<label for="_frm-iconform-name">是否支持第三方登录</label>
-				    <input type="checkbox" name ="ishare">
+				    <input type="checkbox"  id="ishare" name ="ishare">
 				    <p class="help-block">应用的图标Example block-level help text here.</p>
 				</div>
 				<div class="form-field-outer">
 					<label for="_frm-iconform-name">应用介绍</label>
 					<div class="form-field-container">
-						<textarea name="intro" placeholder="应用介绍" class="form-text ui-widget ui-widget-content ui-autocomplete-input ui-corner-all" type="text" style="height:60px;width:400px;vertical-align:text-top"></textarea>
+						<textarea  id="intro" name="intro" placeholder="应用介绍" class="form-text ui-widget ui-widget-content ui-autocomplete-input ui-corner-all" type="text" style="height:60px;width:400px;vertical-align:text-top"></textarea>
 					</div>
 					<div class="form-field-help-text">
 						应用介绍
