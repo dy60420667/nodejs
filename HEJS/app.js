@@ -4,6 +4,8 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var busboy = require('connect-busboy'); // Form parsing
+
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -21,6 +23,18 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+// Form parser and conf
+app.use(busboy({
+    highWaterMark: 2 * 1024 * 1024, // Max size of internal stream buffer
+    limits: {
+        fileSize: 10 * 1024 * 1024,
+        parts: 256,
+        files: 16,
+        headerPairs: 1000,
+        fieldSize: 1024,
+        fields: 128
+    }
+}));
 
 app.use('/', routes);
 app.use('/users', users);

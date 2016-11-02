@@ -70,7 +70,7 @@
 	      </div>
 
 	      <div id="inputs">			
-				<form role="form"  id="addTaskForm" action="task/addTask" method="post">
+				<form role="form"  id="addTaskForm" action="task/addTask" method="post" enctype="multipart/form-data">
 				<div class="form-field-outer">
 					<label for="_frm-iconform-name">应用名</label>
 					<div class="form-field-container">
@@ -93,7 +93,7 @@
 				</div>
 				<div class="form-field-outer">
 					<label for="_frm-iconform-name">图标</label>
-				    <input type="file" name="upload" id="upload" onchange="selectImage(this)"  accept="image/*" multiple="multiple">
+				    <input type="file" name="upload" id="upload" onchange="selectImage(this)" multiple="multiple">
 				    <img src="/images/icon_default.png" name="image" id="image" border=0 id="img"/>
 				    <p class="help-block">应用的图标Example block-level help text here.</p>
 				</div>

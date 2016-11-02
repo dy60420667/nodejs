@@ -1,0 +1,11 @@
+<% include header.html %>
+<div class="container">
+    <h1>Done</h1>
+    Processed
+       <ul>
+        <% for(var i=0; i<fields.length; i++) { %>
+        <li><%=fields[i].name +fields[i].val %></li>
+        <% } %>
+    </ul>
+</div><!-- /.container --> 
+<% include foot.html %>
