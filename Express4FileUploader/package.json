@@ -1,0 +1,16 @@
+{
+  "name": "Express4FileUpload",
+  "description": "Express4 File Upload with Connect-Busboy",
+  "version": "0.0.1",
+  "private": false,
+  "scripts": {
+    "start": "hotnode ./bin/www"
+  },
+  "dependencies": {
+    "connect-busboy": "0.0.1",
+    "express": "~4.13.4",
+    "hjs": "~0.0.6",
+    "morgan": "~1.0.0",
+    "static-favicon": "~1.0.0"
+  }
+}

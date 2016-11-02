@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ title }}</title>
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
+</head>
+<body>
+<h1>{{ title }}</h1>
+
+<p>Welcome to {{ title }}</p>
+
+
+<form method="POST" action="/fileupload" enctype="multipart/form-data">
+    <input type="text" name="textfield" ><br/>
+    <select name="selectfield">
+        <option value="1">1</option>
+        <option value="10">10</option>
+        <option value="100">100</option>
+        <option value="9001">9001</option>
+    </select><br/>
+    <input type="checkbox" name="theCheckbox" value="1">Checkbox item<br/>
+    <input type="file" name="files" size="128" multiple><br/>
+    <input type="submit">
+</form>
+
+
+</body>
+</html>
