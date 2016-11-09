@@ -10,11 +10,8 @@
 
         <h2>1.下载apktool工具：</h2>
         <p>apktool官方网站：<a href = 'https://ibotpeaches.github.io/Apktool/'target="_blank">https://ibotpeaches.github.io/Apktool/</a></p>
-        <p>本地下载地址：<a href="http://pan.baidu.com/s/1jIdQx6m" target="_blank">http://pan.baidu.com/s/1jIdQx6m</a>
-        提取密码：sc8x</p>
-        </br>
         <h2>2.解压apktool并配置apktool环境变量</h2>
-        <p>这个地方就不详细说明了</p>
+        <p>安装方法：<a href="https://ibotpeaches.github.io/Apktool/install/" target="_blank">https://ibotpeaches.github.io/Apktool/install</a></p>
         <h2>3.创建打包工具</h2>
          </br>
         <h3>3.1 新建一个文件夹</h3>
@@ -43,7 +40,7 @@
          jarsigner -digestalg SHA1 -sigalg MD5withRSA -keystore android.keystore -storepass android -signedjar enhanced<em>sign.apk enhanced.apk othername</p>
          <strong>对比一下旧的命令：</strong>jarsigner -verbose -keystore android.keystore -signedjar enhanced</em>signed.apk enhanced.apk android.keystore</br>
         可以发现，新命令添加了-digestalg SHA1 -sigalg MD5withRSA这一个东西。抽取一下语法如下：</br>
-        jarsigner -digestalg SHA1 -sigalg MD5withRSA -keystore [你的keystore] -storepass [keystore的密码] -signedjar [签名后的apk] [未签名的apk] [keystore的别名]</p>
+        <strong>jarsigner -digestalg SHA1 -sigalg MD5withRSA -keystore [你的keystore] -storepass [keystore的密码] -signedjar [签名后的apk] [未签名的apk] [keystore的别名]</strong></p>
         </li>
         </ul>
          </br>
