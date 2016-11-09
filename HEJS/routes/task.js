@@ -56,8 +56,7 @@ var handleForm = function(req, res) {
             console.log("xxxxx:"+result.fields[x].name);
             console.log("xxxxx:"+result.fields[x].val);
             txt = txt+result.fields[x].val;
-        }
-            
+        }    
 
         console.log('txt:'+txt)
     	result.title="新闻客户端定制服务";
