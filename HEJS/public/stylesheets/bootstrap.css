@@ -774,12 +774,13 @@ h6 {
 
 #page-header p, #page-links p {
     width: 40em;
+    margin-top: 10px;
 }
 #breadcrumb a {
     text-decoration: none;
     color: #888;
 }
-#page-header h2, #page-links h2 {
+#page-header h5, #page-links h5 {
     color: #09C;
     font-weight: bold;
     font-size: 16px;
@@ -867,28 +868,28 @@ h3 {
 }
 
 h1 {
-  font-size: 38.5px;
-}
-
-h2 {
   font-size: 31.5px;
 }
 
-h3 {
+h2 {
   font-size: 24.5px;
+  border-bottom: 1px solid #ccc;
+  margin: 0 0 10px;
+  padding: 0;
 }
 
-h4 {
+h3 {
   font-size: 17.5px;
 }
 
-h5 {
+h4 {
   font-size: 14px;
 }
 
-h6 {
+h5 {
   font-size: 11.9px;
 }
+
 
 h1 small {
   font-size: 24.5px;
@@ -1072,23 +1073,40 @@ address {
   line-height: 20px;
 }
 
-code,
-pre {
-  padding: 0 3px 2px;
-  font-family: Monaco, Menlo, Consolas, "Courier New", monospace;
+pre, code{
   font-size: 12px;
-  color: #333333;
-  -webkit-border-radius: 3px;
-     -moz-border-radius: 3px;
-          border-radius: 3px;
+  font-family: Consolas, "Liberation Mono", Courier, monospace;
 }
 
 code {
-  padding: 2px 4px;
-  color: #d14;
+  margin: 0 0px;
+  padding: 0px 0px;
   white-space: nowrap;
-  background-color: #f7f7f9;
-  border: 1px solid #e1e1e8;
+  border: 1px solid #eaeaea;
+  background-color: #f8f8f8;
+  border-radius: 3px;
+}
+
+pre>code {
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  border: none;
+  background: transparent;
+}
+pre {
+  background-color: #f8f8f8;
+  border: 1px solid #ccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px;
+}
+
+pre code, pre tt {
+  background-color: transparent;
+  border: none;
 }
 
 pre {

@@ -1,0 +1,64 @@
+<% include ../resource/header.html %>
+<div class="container">
+
+    <div id="header">
+        <h1>欢迎使用<%= title %></h1>
+    </div>
+      <div id="page-header">
+        <h1>用自己的keystore对未签名的文件签名生成新的apk</h1>
+        </br>
+
+        <h2>1.下载apktool工具：</h2>
+        <p>apktool官方网站：<a href = 'https://ibotpeaches.github.io/Apktool/'target="_blank">https://ibotpeaches.github.io/Apktool/</a></p>
+        <p>本地下载地址：<a href="http://pan.baidu.com/s/1jIdQx6m" target="_blank">http://pan.baidu.com/s/1jIdQx6m</a>
+        提取密码：sc8x</p>
+        </br>
+        <h2>2.解压apktool并配置apktool环境变量</h2>
+        <p>这个地方就不详细说明了</p>
+        <h2>3.创建打包工具</h2>
+         </br>
+        <h3>3.1 新建一个文件夹</h3>
+        <p>命名为 auto_sign</p>
+        <h3>3.2 提取必备文件 ###</h3>
+        <ul>
+        <li>把签名的keystore复制到改文件目录下面</li>
+        <li>把待签名的apk文件复制到该目录下面，并改名为tmp.apk</li>
+        </ul>
+        <h3>3.3 制作bat签名工具 ###</h3>
+        <p>在auto_sign文件夹下新建文件sign.bat</p>
+        <p>用记事本打开sign.bat输入以下内容：</p>
+        <ul>
+        <li>
+        <p>如果你本地jdk是1.6及一下的：</br>
+        <p style="color:#F00;font-weight:bold">
+         jarsigner -verbose -keystore android.keystore -signedjar enhanced_signed.apk enhanced.apk othername</p> 
+        <strong>命令说明：</strong></br>
+        <strong>-verbose：</strong>显示出签名详细信息</br>
+        <strong>-keystore :</strong>表示使用当前目录中的android.keystore签名证书文件，这里需要替换成你自己的keystore ！</br>
+        <strong>-signedjar enhanced<em>signed.apk enhanced.apk othername</strong>表示签名后生成的APK名称是enhanced</em>signed.apk，需要签名的APK名称是enhanced.apk，othername表示keystore的别名，这里你需要把这个别名替换成你的keystore的别名 ！</br></p>
+        </li>
+        <li>
+        <p>如果本地jdk是1.7及以上的：</br>
+        <p style="color:#F00;font-weight:bold">
+         jarsigner -digestalg SHA1 -sigalg MD5withRSA -keystore android.keystore -storepass android -signedjar enhanced<em>sign.apk enhanced.apk othername</p>
+         <strong>对比一下旧的命令：</strong>jarsigner -verbose -keystore android.keystore -signedjar enhanced</em>signed.apk enhanced.apk android.keystore</br>
+        可以发现，新命令添加了-digestalg SHA1 -sigalg MD5withRSA这一个东西。抽取一下语法如下：</br>
+        jarsigner -digestalg SHA1 -sigalg MD5withRSA -keystore [你的keystore] -storepass [keystore的密码] -signedjar [签名后的apk] [未签名的apk] [keystore的别名]</p>
+        </li>
+        </ul>
+         </br>
+        <h2>4.下面附上一个我自己写的自动签名bat工具吧：</h2>
+        <p>注：关键信息已经用*****代替,请自己替换</p>
+        <pre><code>@ECHO OFF
+Echo sign Created By Damao
+Echo tmp.zip is now being signed and will be renamed to sign.zip
+
+@jarsigner -digestalg SHA1 -sigalg MD5withRSA -keystore cnhubei.jks -storepass ******** -signedjar sign.apk tmp.apk *****
+
+Echo Signing Complete 
+Pause
+EXIT
+</code></pre>
+    </div>
+</div><!-- /.container --> 
+<% include ../resource/footer.html %>

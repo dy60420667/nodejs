@@ -1,11 +1,16 @@
-<% include header.html %>
+<% include resource/header.html %>
 <div class="container">
-    <h1>Done</h1>
-    Processed
-       <ul>
-        <% for(var i=0; i<fields.length; i++) { %>
-        <li><%=fields[i].name +fields[i].val %></li>
-        <% } %>
-    </ul>
+
+    <div id="header">
+        <h1>欢迎使用<%= title %></h1>
+    </div>
+    <div id="page-header">
+        <h1>Done</h1>
+        <ul>
+            <% for(var i=0; i<fields.length; i++) { %>
+            <li><%=fields[i].name +" : "+fields[i].val %></li>
+            <% } %>
+        </ul>
+    </div>
 </div><!-- /.container --> 
-<% include foot.html %>
+<% include resource/footer.html %>
