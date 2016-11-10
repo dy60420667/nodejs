@@ -37,7 +37,6 @@ def modifyIcon():
 	print('图片资源存在，开始修改ic_launcher')
 	for filedrawable in os.listdir(path_apk_folder+"\\res"):
 		if 'drawable' in filedrawable:
-			print('处理文件:'+path_apk_folder+"\\res\\"+filedrawable)
 			for fileitem in os.listdir(path_apk_folder+"\\res\\"+filedrawable):
 				if 'ic_launcher' in fileitem:
 					print('删除文件:'+path_apk_folder+"\\res\\"+filedrawable+"\\"+fileitem)
@@ -47,7 +46,6 @@ def modifyIcon():
 				shutil.copy(path_item+"\\ic_launcher.png", path_apk_folder+"\\res\\"+filedrawable)
 				print('拷贝文件成功:'+path_apk_folder+"\\res\\"+filedrawable)	
 		if 'mipmap' in filedrawable:
-			print('处理文件:'+path_apk_folder+"\\res\\"+filedrawable)
 			for fileitem in os.listdir(path_apk_folder+"\\res\\"+filedrawable):
 				if 'ic_launcher' in fileitem:
 					os.remove(path_apk_folder+"\\res\\"+filedrawable+"\\"+fileitem)
