@@ -89,6 +89,7 @@ def signApk():
 	print('签名命令:'+signapkcommond)
 	os.system(signapkcommond)
 	print('签名成功')
+	print('python is end')
 
 
 print("当前目录为："+path_item)
@@ -97,3 +98,4 @@ changeApk()
 modifyIcon()
 signApk()
 print("脚本执行结束：")
+
