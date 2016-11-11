@@ -5,14 +5,10 @@ var child_process = require('child_process');
 var router = express.Router();
 var app_autosizn_file = "./public/python/";//自动签名文件存放位置
 
-
-
 var handleFile = function(filename, file, targetDir) {
     // var targetFile = targetDir + filename;
     var targetFile = app_autosizn_file+filename;
- 
     var fstream;
-
     console.log("Uploading: " + filename + ' to ' + targetFile);
     fstream = fs.createWriteStream(targetFile);
     file.pipe(fstream);
@@ -23,7 +19,6 @@ var handleFile = function(filename, file, targetDir) {
         console.log("已下载："+passedLength);
 
     });
-
     fstream.on('close', function () {
         // Note to self: Fire off an event to handle the file in tmp here (check it, thumbs gen, record it, remove it)
         console.log('Saved file: '+targetFile);
@@ -57,9 +52,8 @@ var initAutoSign = function(){
            return console.error(err);
        }
        console.log("str文件删除成功！");
-    });
+    }); 
 };
-
 
 //执行自动签名的脚本
 var exceAutoSign = function(){
@@ -90,28 +84,29 @@ var handleGetStr = function(req,res){
         console.log('readfile error ')
     }
     console.log('readfile:'+data);
-
     res.writeHead(200,{"Content-Type":"text/plain","Access-Control-Allow-Origin":"http://localhost"});
-    res.write(data);      
-    
+    res.write(data);
     res.end();
 };
 
-
+var  fileapk;
 var handleDownload = function(req,res){
     res.setHeader('Content-disposition', 'attachment; filename=app.apk');
     var path = app_autosizn_file+"apk/dist/app.apk"
-    fs.createReadStream(path).pipe(res);
+    fileapk = fs.createReadStream(path);
+    fileapk.pipe(res);
 };
 
 // Parse form and handle files and fields.
 var handleForm = function(req, res) {
     console.log('handleForm');
     initAutoSign();
+    if(fileapk!=null){
+        fileapk.unpipe(res);
+    }
 
     var result = { files: [], fields: [] };
     var jsonField = {};
-
     req.busboy.on('file', function (fieldname, file, filename) {
         if(isDefined(filename)) {
     	   result.files.push({ name: filename});
@@ -133,12 +128,9 @@ var handleForm = function(req, res) {
             console.log("xxxxx:"+result.fields[x].name);
             console.log("xxxxx:"+result.fields[x].val);
             txt = txt+result.fields[x].val;
-        }    
-
+        }
         console.log('txt:'+txt);
-        
         fs.writeFileSync(app_autosizn_file+'tmp.json',JSON.stringify(jsonField));
-
         // json对象转化成字符串
         // JSON.stringify(obj)
 
@@ -147,12 +139,10 @@ var handleForm = function(req, res) {
         // res.render(result);
     });
     req.pipe(req.busboy);
-
 };
 
 router.post('/addTask', handleForm);
-router.get('/downloadapk', handleDownload);
 router.get('/task/getstr', handleGetStr);
-
+router.get('/downloadapk', handleDownload);
 
 module.exports = router;
