@@ -52,7 +52,14 @@ var initAutoSign = function(){
        }
        console.log("tmp.json文件删除成功！");
     });
-}
+    fs.unlink(app_autosizn_file+'str',function(err) {
+       if (err) {
+           return console.error(err);
+       }
+       console.log("str文件删除成功！");
+    });
+};
+
 
 //执行自动签名的脚本
 var exceAutoSign = function(){
@@ -66,18 +73,40 @@ var exceAutoSign = function(){
          }
          if(error) {
             console.info('stderr : '+stderr);
+            fs.writeFileSync(app_autosizn_file+"str","1");
          }else{
             console.log('apk is sucess');
-            
-
-            
-            document.getElementById("result").innerHTML = "这是动态添加的" ;
+            fs.writeFileSync(app_autosizn_file+"str","0");
          }
     });
-}
+};
+
+var handleGetStr = function(req,res){
+    console.log('handleGetStr');
+    var data="2";
+    try{
+        data = fs.readFileSync(app_autosizn_file+"str");
+    }catch(e){
+        console.log('readfile error ')
+    }
+    console.log('readfile:'+data);
+
+    res.writeHead(200,{"Content-Type":"text/plain","Access-Control-Allow-Origin":"http://localhost"});
+    res.write(data);      
+    
+    res.end();
+};
+
+
+var handleDownload = function(req,res){
+    res.setHeader('Content-disposition', 'attachment; filename=app.apk');
+    var path = app_autosizn_file+"apk/dist/app.apk"
+    fs.createReadStream(path).pipe(res);
+};
 
 // Parse form and handle files and fields.
 var handleForm = function(req, res) {
+    console.log('handleForm');
     initAutoSign();
 
     var result = { files: [], fields: [] };
@@ -85,13 +114,13 @@ var handleForm = function(req, res) {
 
     req.busboy.on('file', function (fieldname, file, filename) {
         if(isDefined(filename)) {
-	   result.files.push({ name: filename});
-	   handleFile(filename, file, os.tmpdir());
-	}
+    	   result.files.push({ name: filename});
+    	   handleFile(filename, file, os.tmpdir());
+    	}
     });
     req.busboy.on('field', function(key, value, keyTruncated, valueTruncated) {
         console.log('Field received: '+key+' = '+value);
-        result.fields.push({ 'name': key, val: value });
+        result.fields.push({'name': key, val: value });
         console.log('_______________:'+result.fields);
         jsonField[key] = value;
 
@@ -106,7 +135,7 @@ var handleForm = function(req, res) {
             txt = txt+result.fields[x].val;
         }    
 
-        console.log('txt:'+txt)
+        console.log('txt:'+txt);
         
         fs.writeFileSync(app_autosizn_file+'tmp.json',JSON.stringify(jsonField));
 
@@ -121,7 +150,9 @@ var handleForm = function(req, res) {
 
 };
 
-/* GET home page. */
 router.post('/addTask', handleForm);
+router.get('/downloadapk', handleDownload);
+router.get('/task/getstr', handleGetStr);
+
 
 module.exports = router;
