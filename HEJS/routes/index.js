@@ -28,4 +28,14 @@ router.get('/apktool', function(req, res, next) {
 
 
 
+var handleBack = function(req,res){
+   console.Log('back');
+   // window.history.go(-1);
+};
+
+router.get('back', handleBack);
+
+
+
+
 module.exports = router;

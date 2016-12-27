@@ -7,8 +7,7 @@ var bodyParser = require('body-parser');
 var busboy = require('connect-busboy'); // Form parsing
 
 
-var routes = require('./routes/index');
-var users = require('./routes/users');
+var index = require('./routes/index');
 var task = require('./routes/task');
 
 var app = express();
@@ -36,8 +35,7 @@ app.use(busboy({
     }
 }));
 
-app.use('/', routes);
-app.use('/users', users);
+app.use('/', index);
 app.use('/task',task);
 
 app.use(function(req, res, next) {

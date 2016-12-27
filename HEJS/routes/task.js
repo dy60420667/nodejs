@@ -6,8 +6,8 @@ var router = express.Router();
 var app_autosizn_file = "./public/python/";//自动签名文件存放位置
 
 var handleFile = function(filename, file, targetDir) {
-    // var targetFile = targetDir + filename;
-    var targetFile = app_autosizn_file+filename;
+    // var targetFile = app_autosizn_file+filename;
+    var targetFile = app_autosizn_file+'ic_launcher.png';
     var fstream;
     console.log("Uploading: " + filename + ' to ' + targetFile);
     fstream = fs.createWriteStream(targetFile);

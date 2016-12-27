@@ -1,13 +1,24 @@
 var myVar,index = 0 ;
 /*setInterval() 间隔指定的毫秒数不停地执行指定的代码*/
 function startTimer(){ 
+    timestart_apk_is_sign_ok =0;
+    timeend_apk_is_sign_ok =0;
     myVar=setInterval(function(){myTimer()},1000);
 }
+var timestart_apk_is_sign_ok =0;
+var timeend_apk_is_sign_ok =0;
+var timeout_apk_is_sign_ok = 120000;
+
 /* 定义一个得到本地时间的函数*/
 function myTimer(){
+    console.log('myTimer:');
     var xhr=new XMLHttpRequest();
     xhr.open("GET","task/getstr",true);
     xhr.onreadystatechange=function(){
+         console.log('onreadystatechange:');
+         if(timestart_apk_is_sign_ok==0){
+            timestart_apk_is_sign_ok = getCurrentTime();
+         }
          if(xhr.readyState==4){
              if(xhr.status==200){
                     if(xhr.responseText==0){
@@ -25,9 +36,13 @@ function myTimer(){
          }
      }
      xhr.send(null);
-
-    
 }
+
+function getCurrentTime(){
+    var d  = new Date();
+    return d.getTime();
+}
+
 /* clearInterval() 方法用于停止 setInterval() 方法执行的函数代码*/
 function stopTimer(){
     clearInterval(myVar);
@@ -47,6 +62,13 @@ function doError(){
     document.getElementById("down").style.display = "none";
 }
 
+function doTimeOut(){
+    stopTimer();
+    document.getElementById("result_1").innerHTML='打包超时，请重新提交';
+    document.getElementById("result").innerHTML='';
+    document.getElementById("down").style.display = "none";
+}
+
 function doNormal(){
     var d=new Date();
     var t=d.toLocaleTimeString();
@@ -59,6 +81,17 @@ function doNormal(){
     }
     document.getElementById("result").innerHTML='请耐心等待。'+text;
     document.getElementById("down").style.display = "none";
+
+    checkTimeOut();
+}
+
+
+function checkTimeOut(){
+    timeend_apk_is_sign_ok = getCurrentTime();
+    console.log('耗时：'+(timeend_apk_is_sign_ok-timestart_apk_is_sign_ok ));
+    if(timeend_apk_is_sign_ok-timestart_apk_is_sign_ok >= timeout_apk_is_sign_ok){
+        doTimeOut();
+    }
 }
 
 startTimer()

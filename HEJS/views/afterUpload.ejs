@@ -7,7 +7,13 @@
     </div>
     <hr/>
     <div id="page-header">
-        <h1>Done</h1>
+        <div id="breadcrumb">
+              <p>
+                <a href="Javascript:window.history.go(-1)">&lt;&lt; 返回</a>
+              </p>
+        </div>
+
+        <hr/>
         <ul>
             <% for(var i=0; i<fields.length; i++) { %>
             <li><%=fields[i].name +" : "+fields[i].val %></li>
