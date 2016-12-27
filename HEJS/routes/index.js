@@ -26,6 +26,12 @@ router.get('/apktool', function(req, res, next) {
   res.render('apktools/apktool', { title: '新闻客户端定制服务' });
 });
 
+/* GET home page. */
+router.get('/descripty', function(req, res, next) {
+  res.render('descripty', { title: '新闻客户端定制服务' });
+});
+
+
 
 
 var handleBack = function(req,res){
