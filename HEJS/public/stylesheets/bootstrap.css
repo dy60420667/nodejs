@@ -788,12 +788,12 @@ h6 {
     margin-bottom: 8px;
 }
 
+
 #inputs {
+    padding: 20px;
+    min-height: 100%;
     background-color: #eee;
-}
-#inputs {
-    padding-left: 20px;
-    padding-right: 20px;
+    min-height: 400px;
 }
 #inputs-form {
     background-color: #eee;
@@ -4486,8 +4486,9 @@ input[type="submit"].btn.btn-mini {
 .navbar {
   *position: relative;
   *z-index: 2;
-  margin-bottom: 20px;
+  margin-bottom: 40px;
   overflow: visible;
+  background-color: 
 }
 
 .navbar-inner {
