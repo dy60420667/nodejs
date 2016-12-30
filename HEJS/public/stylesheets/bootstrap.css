@@ -816,13 +816,17 @@ h6 {
     display: inline-block;
     vertical-align: top;
 }
-.form-field-outer>label .form-field-help-text {
+.form-field-help-text {
     font-weight: normal;
     font-size: 11px;
     line-height: 12px;
-    color: #888;
+    color: #939188;
 }
 
+.error{
+   font-size: 14px;
+   color: #f20404;
+}
 .form-button, button {
     margin: 0;
     color: #fff;

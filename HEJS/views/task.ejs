@@ -64,7 +64,7 @@
 				<div class="form-field-outer">
 					<label for="_frm-iconform-name">应用名</label>
 					<div class="form-field-container">
-						<input id="appname" name="appname" placeholder="请输入应用名称" class="form-text ui-widget ui-widget-content ui-autocomplete-input ui-corner-all" type="text">
+						<input id="appname" name="appname" placeholder="请输入应用名称" class="form-text ui-widget ui-widget-content ui-autocomplete-input ui-corner-all" type="text"><dy class="error"> *</dy>
 					</div>
 					<div class="form-field-help-text">
 						应用名称最好是中文，不能包含特殊字符，长度请控制在五个字符以内，不能为空
@@ -73,7 +73,7 @@
 				<div class="form-field-outer">
 					<label for="_frm-iconform-name">包名</label>
 					<div class="form-field-container">
-						<input id="package" name="package" placeholder="package" class="form-text ui-widget ui-widget-content ui-autocomplete-input ui-corner-all" type="text">
+						<input id="package" name="package" placeholder="package" class="form-text ui-widget ui-widget-content ui-autocomplete-input ui-corner-all" type="text"><dy class="error"> *</dy>
 					</div>
 					<div class="form-field-help-text">
 						包名是客户端唯一标识，请以"com.cnhubei."开头，后面带上有意义的客户端表示。
@@ -82,14 +82,18 @@
 				<div class="form-field-outer">
 					<label for="_frm-iconform-name">图标</label>
 				    <input type="file" name="upload" id="upload" accept="image/*" onchange="selectImage(this)" multiple="multiple">
-				    <img src="/images/icon_default.png" name="image" id="image" border=0 id="img"/>
-				    <p class="help-block">应用的图标要求为72*72的png图标。</p>
-				    <p class="help-block"> 注：为了在6.0以上系统适配，图标避免使用渐变色和阴影</p>
+				    <img src="/images/icon_default.png" name="image" id="image" border=0 id="img"/><dy class="error"> *</dy>
+				    <div class="form-field-help-text">
+				    <p>应用的图标要求为72*72的png图标。</p>
+				    <p> 注：为了在6.0以上系统适配，图标避免使用渐变色和阴影</p>
+				    </div>
 				</div>
 				<div class="form-field-outer">
 					<label for="_frm-iconform-name">是否支持第三方登录</label>
 				    <input type="checkbox"  id="ishare" name ="ishare">
-				    <p class="help-block">请选择是否支持第三方登录</p>
+				    <div class="form-field-help-text">
+				    <p>请选择是否支持第三方登录</p>
+				    </div>
 				</div>
 				<div class="form-field-outer">
 					<label for="_frm-iconform-name">应用介绍</label>
