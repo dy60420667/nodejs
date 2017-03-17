@@ -814,7 +814,6 @@ h6 {
 /* end clearfix */
 .ui-helper-zfix { width: 100%; height: 100%; top: 0; left: 0; position: absolute; opacity: 0; filter:Alpha(Opacity=0); }
 
-
 /* Interaction Cues
 ----------------------------------*/
 .ui-state-disabled { cursor: default !important; }
@@ -890,11 +889,7 @@ button.ui-button::-moz-focus-inner { border: 0; padding: 0; } /* reset extra pad
 .form-field-container-item {
   float:left
 }
-.ui-helper-hidden-accessible {
-  position: absolute !important;
-  clip: rect(1px 1px 1px 1px);
-  clip: rect(1px,1px,1px,1px);
-}
+
 .form-field-help-text {
     font-weight: normal;
     font-size: 11px;
