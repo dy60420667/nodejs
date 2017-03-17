@@ -95,21 +95,19 @@
 					<label for="_frm-iconform-name">版本</label>
 					<div class="form-field-container">
 						<label>versionnmae</label><dy class="error"> *</dy><input id="versionnmae" name="versionnmae" placeholder="请输入版本名称" value="V 1.0" class="form-text ui-widget ui-widget-content ui-autocomplete-input ui-corner-all" type="text">
-
 						<label>versioncode</label><dy class="error"> *</dy><input id="versioncode" name="versioncode" placeholder="请输入版本号" value = "10" class="form-text ui-widget ui-widget-content ui-autocomplete-input ui-corner-all" type="text">
 					</div>
 				</div>
 				<div class="form-field-outer">
 					<label for="_frm-iconform-name">app信息</label>
 					<div class="form-field-container" >
-						<label>app.key</label>
-						<input id="app_appkey" name="app_appkey" placeholder="请输入app.key" value="7" class="form-text ui-widget ui-widget-content ui-autocomplete-input ui-corner-all" type="text"><dy class="error"> *</dy>
-						<label>app.appsecret</label>
-						<input id="app_appsecret" name="app_appsecret" placeholder="请输入app.appsecret" value = "suibiantiande" class="form-text ui-widget ui-widget-content ui-autocomplete-input ui-corner-all" type="text"><dy class="error"> *</dy>
-						<label>jpush_appkey</label>
-						<input id="jpush_appkey" name="jpush_appkey" placeholder="请输入jpush_appkey" value = "aa123456789" class="form-text ui-widget ui-widget-content ui-autocomplete-input ui-corner-all" type="text"><dy class="error"> *</dy>
-						<label>umeng_appkey</label>
-						<input id="umeng_appkey" name="umeng_appkey" placeholder="请输入umeng_appkey" value = "bb123456789" class="form-text ui-widget ui-widget-content ui-autocomplete-input ui-corner-all" type="text"><dy class="error"> *</dy>
+						<label>app.key</label><dy class="error"> *</dy><input id="app_appkey" name="app_appkey" placeholder="请输入app.key" value="7" class="form-text ui-widget ui-widget-content ui-autocomplete-input ui-corner-all" type="text">
+						<label>app.appsecret</label><dy class="error"> *</dy>
+						<input id="app_appsecret" name="app_appsecret" placeholder="请输入app.appsecret" value = "suibiantiande" class="form-text ui-widget ui-widget-content ui-autocomplete-input ui-corner-all" type="text">
+						<label>jpush_appkey</label><dy class="error"> *</dy>
+						<input id="jpush_appkey" name="jpush_appkey" placeholder="请输入jpush_appkey" value = "aa123456789" class="form-text ui-widget ui-widget-content ui-autocomplete-input ui-corner-all" type="text">
+						<label>umeng_appkey</label><dy class="error"> *</dy>
+						<input id="umeng_appkey" name="umeng_appkey" placeholder="请输入umeng_appkey" value = "bb123456789" class="form-text ui-widget ui-widget-content ui-autocomplete-input ui-corner-all" type="text">
 					</div>
 				</div>
 				<div class="form-field-outer">
@@ -123,7 +121,22 @@
 				</div>
 				<div class="form-field-outer">
 					<label for="_frm-iconform-name">是否支持视频</label>
-				    <input type="checkbox"  id="vedio" name ="vedio">
+
+					<!--<input type="radio" name="_frm-iconform-hairline" id="_frm-iconform-hairline-1" value="1" class="ui-helper-hidden-accessible">-->
+					<!--<input type="radio" name="_frm-iconform-hairline" id="_frm-iconform-hairline-1" value="1" class="ui-helper-hidden-accessible">-->
+				    <!--<input type="checkbox"  id="vedio" name ="vedio">-->
+					<div class="form-field-container">
+						<div id="_frm-iconform-hairline" class=".form-field-buttonset ui-buttonset">
+							<input type="radio" name="_frm-iconform-hairline" id="_frm-iconform-hairline-1" value="1" class="ui-helper-hidden-accessible">
+							<label for="_frm-iconform-hairline-1" aria-pressed="true" class="ui-button ui-widget ui-state-default ui-button-text-only ui-corner-left ui-state-active" role="button" aria-disabled="false">
+								<span class="ui-button-text">On</span>
+							</label>
+							<input type="radio" name="_frm-iconform-hairline" id="_frm-iconform-hairline-0" value="0" checked="checked" class="ui-helper-hidden-accessible">
+								<label for="_frm-iconform-hairline-0" class="ui-button ui-widget ui-state-default ui-button-text-only ui-corner-right" aria-pressed="false" role="button" aria-disabled="false">
+									<span class="ui-button-text">Off</span>
+								</label>
+						</div>
+					</div>
 				</div>
 				<div class="form-field-outer">
 					<label for="_frm-iconform-name">是否支持音频</label>
@@ -143,16 +156,17 @@
 				<div class="form-field-outer">
 					<label for="_frm-iconform-name">分享appkey设置</label>
 					<div class="form-field-container" >
-						<input id="wx_key" name="wx_key" placeholder="请输入wx_key" class="form-text ui-widget ui-widget-content ui-autocomplete-input ui-corner-all" type="text"><dy class="error"> *</dy>
-						&nbsp &nbsp &nbsp &nbsp &nbsp
+						<label>wx_key</label>
+						<input id="wx_key" name="" placeholder="请输入wx_key" class="form-text ui-widget ui-widget-content ui-autocomplete-input ui-corner-all" type="text"><dy class="error"> *</dy>
+						<label>wx_secret</label>
 						<input id="wx_secret" name="wx_secret" placeholder="请输入wx_secret" class="form-text ui-widget ui-widget-content ui-autocomplete-input ui-corner-all" type="text"><dy class="error"> *</dy>
-						&nbsp &nbsp &nbsp &nbsp &nbsp
+						<label>qq_id</label>
 						<input id="qq_id" name="qq_id" placeholder="请输入qq_id" class="form-text ui-widget ui-widget-content ui-autocomplete-input ui-corner-all" type="text"><dy class="error"> *</dy>
-						&nbsp &nbsp &nbsp &nbsp &nbsp
+						<label>qq_key</label>
 						<input id="qq_key" name="qq_key" placeholder="请输入qq_key" class="form-text ui-widget ui-widget-content ui-autocomplete-input ui-corner-all" type="text"><dy class="error"> *</dy>
-						&nbsp &nbsp &nbsp &nbsp &nbsp
+						<label>sina_key</label>
 						<input id="sing_key" name="sina_key" placeholder="请输入sina_key" class="form-text ui-widget ui-widget-content ui-autocomplete-input ui-corner-all" type="text"><dy class="error"> *</dy>
-						&nbsp &nbsp &nbsp &nbsp &nbsp
+						<label>sina_secret</label>
 						<input id="sina_secret" name="sina_secret" placeholder="请输入sina_secret" class="form-text ui-widget ui-widget-content ui-autocomplete-input ui-corner-all" type="text"><dy class="error"> *</dy>
 					</div>
 				</div>
