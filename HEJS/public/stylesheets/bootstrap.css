@@ -225,7 +225,7 @@ html, body {
     font-family: helvetica,arial,sans-serif;
     font-size: 13px;
     line-height: 16px;
-    background-color: #ccc;
+    background-color: #eeeeee;
     color: #333;
 }
 
@@ -816,6 +816,9 @@ h6 {
     display: inline-block;
     vertical-align: top;
 }
+.form-field-container-item {
+  float:left
+}
 .form-field-help-text {
     font-weight: normal;
     font-size: 11px;
@@ -1004,8 +1007,8 @@ dd {
 hr {
   margin: 20px 0;
   border: 0;
-  border-top: 1px solid #eeeeee;
-  border-bottom: 1px solid #ffffff;
+  border-top: 1px solid #33B5E5;
+  border-bottom: 1px solid#33B5E5;
 }
 
 abbr[title],
