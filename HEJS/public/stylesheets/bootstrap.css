@@ -1272,6 +1272,7 @@ label {
   margin-bottom: 5px;
 }
 
+
 select,
 textarea,
 input[type="text"],
@@ -1363,6 +1364,11 @@ input[type="color"]:focus,
   -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(82, 168, 236, 0.6);
      -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(82, 168, 236, 0.6);
           box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(82, 168, 236, 0.6);
+}
+
+
+input[type="text"]{
+  margin-bottom: 5px;
 }
 
 input[type="radio"],
@@ -6365,3 +6371,68 @@ a.badge:focus {
 .affix {
   position: fixed;
 }
+
+#colorPrimary{ margin:0;padding:0; border:0;width:70px;height:20px;border-right:20px solid #33b5e5;line-height:20px;}
+#colorPrimaryDark{ margin:0;padding:0; border:0;width:70px;height:20px;border-right:20px solid  #33b5e5;line-height:20px;}
+#colorAccent{ margin:0;padding:0; border:0;width:70px;height:20px;border-right:20px solid  #33b5e5;line-height:20px;}
+#color_item_dark{ margin:0;padding:0; border:0;width:70px;height:20px;border-right:20px solid  #33b5e5;line-height:20px;}
+#color_item_normal{ margin:0;padding:0; border:0;width:70px;height:20px;border-right:20px solid  #33b5e5;line-height:20px;}
+
+
+lable_text{
+  width:150px !important;
+  display:inline-block;
+}
+
+
+
+.radio_on_left{
+  background: #33b5e5;
+  margin: 0px;
+  height: 20px;
+  padding: 3px 20px;
+
+  border-bottom-left-radius: 5px;
+  border-top-left-radius: 5px;
+  border: 1px solid #999999;
+}
+
+.radio_on_right{
+  background: #33b5e5;
+  height: 20px;
+  padding: 3px 20px;
+  margin-left: -4px;
+
+  border-bottom-right-radius: 5px;
+  border-top-right-radius: 5px;
+  border: 1px solid #999999;
+}
+
+.radio_off_left {
+  background: #ffffff;
+  margin: 0px;
+  padding: 3px 20px;
+  height: 20px;
+
+  border-bottom-left-radius: 5px;
+  border-top-left-radius: 5px;
+
+  border-top: 1px solid #999999;
+  border-left: 1px solid #999999;
+  border-bottom: 1px solid #999999;
+}
+
+.radio_off_right {
+  background: #ffffff;
+  padding: 3px 20px;
+  height: 20px;
+  margin-left: -4px;
+
+  border-bottom-right-radius: 5px;
+  border-top-right-radius: 5px;
+
+  border-top: 1px solid #999999;
+  border-rigth: 1px solid #999999;
+  border-bottom: 1px solid #999999;
+}
+

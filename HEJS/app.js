@@ -6,16 +6,11 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var busboy = require('connect-busboy'); // Form parsing
 
-
 var index = require('./routes/index');
-var task = require('./routes/task');
-
 var app = express();
-
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
-
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -36,7 +31,6 @@ app.use(busboy({
 }));
 
 app.use('/', index);
-app.use('/task',task);
 
 app.use(function(req, res, next) {
     var err = new Error('Not Found');
@@ -61,7 +55,6 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
-
 
 module.exports = app;
 
