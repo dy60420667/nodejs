@@ -13,7 +13,7 @@ var timeout_apk_is_sign_ok = 120000;
 function myTimer(){
     console.log('myTimer:');
     var xhr=new XMLHttpRequest();
-    xhr.open("GET","task/getstr",true);
+    xhr.open("GET","getstr",true);
     xhr.onreadystatechange=function(){
          console.log('onreadystatechange:');
          if(timestart_apk_is_sign_ok==0){

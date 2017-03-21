@@ -6,6 +6,10 @@ var router = express.Router();
 // var app_autosizn_file = "./public/python/";//自动签名文件存放位置
 var app_autosizn_file = "D:/CodeGen/tmp/";//自动签名文件存放位置
 
+var file_share_icon = false;
+var file_ic_launcher = false;
+
+
 //处理上传的图片
 var handleFile = function(fieldname,file,filename) {
     console.log("handleFile")
@@ -25,6 +29,13 @@ var handleFile = function(fieldname,file,filename) {
         console.log("已下载："+passedLength);
     });
     fstream.on('close', function () {
+        if(fieldname=='ic_launcher'){
+            file_ic_launcher = true;
+        }
+        if(fieldname=='share_icon'){
+            file_share_icon = true;
+        }
+
         console.log('文件传送完毕')
         console.log('Saved file: '+targetFile);
         //开始执行自动化脚本
@@ -32,13 +43,12 @@ var handleFile = function(fieldname,file,filename) {
         var tmp_json=app_autosizn_file+'tmp.json'; // filespec="C:/path/myfile.txt"
 
         fs.exists(tmp_json, function(exists) {
-            if(exists){
+            if(exists&&file_ic_launcher&&file_share_icon){
                 exceAutoSign();
             }else{
                 console.log('文件不存在')
             }
         });
-
     });
     fstream.on('error', function () {
         console.log('ERROR while saving file: '+filename);
@@ -72,6 +82,9 @@ var initAutoSign = function(){
     }catch (err){
         console.log(err)
     }
+
+    file_share_icon = false;
+    file_ic_launcher  = false;
 };
 
 //执行自动签名的脚本
@@ -116,6 +129,8 @@ var handleDownload = function(req,res){
     fileapk.pipe(res);
 };
 
+var json_field_result = {};//结果数据
+
 // 接收数据
 var handleForm = function(req, res) {
     console.log('handleForm');
@@ -126,9 +141,9 @@ var handleForm = function(req, res) {
     }
     var result = { files: [], fields: [] };
     var json_field = {};//接收到的json数据收集，用以缓存Json文件
-    var json_field_result={};
 
     req.busboy.on('file', function (fieldname, file, filename) {
+        console.log("BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB")
         console.log("file:fieldname,"+fieldname+",file:"+file+",filename:"+filename)
         if(isDefined(filename)) {
     	   result.files.push({ name: filename});
@@ -140,47 +155,60 @@ var handleForm = function(req, res) {
         result.fields.push({name: key, val: value });
         console.log('_______________:'+result.fields);
         json_field[key] = value;
+        
+        if(key=="intro"){
+            console.log(json_field)
+
+            json_field_result["appname"] = json_field['appname'];
+            json_field_result["versionname"] = json_field['versionname'];
+            json_field_result["versioncode"] = json_field['versioncode'];
+            json_field_result["packagename"] = json_field['packagename'];
+            json_field_result["app.appkey"] = json_field['app_appkey'];
+            json_field_result["app.appsecret"] = json_field['app_appsecret'];
+            json_field_result["release_jpush_appkey"] = json_field['release_jpush_appkey'];
+            json_field_result["debug_jpush_appkey"] = json_field['debug_jpush_appkey'];
+            json_field_result["umeng_appkey"] = json_field['umeng_appkey'];
+            json_field_result["audio"] = json_field['audio'];
+            json_field_result["vedio"] = json_field['vedio'];
+
+            json_field_result["appicon"] = {};
+            json_field_result["appicon"]['mipmap-xxhdpi'] = app_autosizn_file+"ic_launcher.png";
+
+
+            if(json_field['social']='false'){
+                file_share_icon = true;
+            }else{
+                // json_field_result["social"] = json_field['social'];
+                json_field_result["socialize"] = {};
+                json_field_result["socialize"]['shareicon'] = app_autosizn_file+"shareicon.png";
+                json_field_result["socialize"]['wx_key'] = json_field['wx_key'];
+                json_field_result["socialize"]['wx_secret'] = json_field['wx_secret'];
+                json_field_result["socialize"]['qq_id'] = json_field['qq_id'];
+                json_field_result["socialize"]['qq_key'] = json_field['qq_key'];
+                json_field_result["socialize"]['sina_key'] = json_field['sina_key'];
+                json_field_result["socialize"]['sina_secret'] = json_field['sina_secret'];
+            }
+
+
+            json_field_result["uicolor"] = {};
+            json_field_result["uicolor"]['colorPrimary'] ="#" + json_field['colorPrimary'];
+            json_field_result["uicolor"]['colorPrimaryDark'] ="#" +  json_field['colorPrimaryDark'];
+            json_field_result["uicolor"]['colorAccent'] ="#" +  json_field['colorAccent'];
+            json_field_result["uicolor"]['color_item_dark'] ="#" +  json_field['color_item_dark'];
+            json_field_result["uicolor"]['color_item_normal'] ="#" +  json_field['color_item_normal'];
+
+            fs.writeFileSync(app_autosizn_file+'tmp.json',JSON.stringify(json_field));
+            fs.writeFileSync(app_autosizn_file+"temp_app.json",JSON.stringify(json_field_result));
+            // json对象转化成字符串
+            console.log('数据传送完毕')
+            console.log(json_field_result)
+
+            result.title="新闻客户端定制服务";
+            res.render('afterUpload', result);
+        }
     });
     req.busboy.on('finish', function() {
-        console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')
-        json_field_result["appname"] = json_field['appname'];
-        json_field_result["versionname"] = json_field['versionname'];
-        json_field_result["versioncode"] = json_field['versioncode'];
-        json_field_result["packagename"] = json_field['packagename'];
-        json_field_result["app.appkey"] = json_field['app_appkey'];
-        json_field_result["app.appsecret"] = json_field['app_appsecret'];
-        json_field_result["release_jpush_appkey"] = json_field['release_jpush_appkey'];
-        json_field_result["debug_jpush_appkey"] = json_field['debug_jpush_appkey'];
-        json_field_result["umeng_appkey"] = json_field['umeng_appkey'];
-        json_field_result["audio"] = json_field['audio'];
-        json_field_result["video"] = json_field['video'];
-
-        json_field_result["appicon"] = {};
-        json_field_result["appicon"]['mipmap-xxhdpi'] = app_autosizn_file+"ic_launcher.png";
-
-        json_field_result["socialize"] = {};
-        json_field_result["socialize"]['shareicon'] = app_autosizn_file+"shareicon.png";
-        json_field_result["socialize"]['wx_key'] = json_field['wx_key'];
-        json_field_result["socialize"]['wx_secret'] = json_field['wx_secret'];
-        json_field_result["socialize"]['qq_id'] = json_field['qq_id'];
-        json_field_result["socialize"]['qq_key'] = json_field['qq_key'];
-        json_field_result["socialize"]['sina_key'] = json_field['sina_key'];
-        json_field_result["socialize"]['sina_secret'] = json_field['sina_secret'];
-
-        json_field_result["uicolor"] = {};
-        json_field_result["uicolor"]['colorPrimary'] = json_field['colorPrimary'];
-        json_field_result["uicolor"]['colorPrimaryDark'] = json_field['colorPrimaryDark'];
-        json_field_result["uicolor"]['colorAccent'] = json_field['colorAccent'];
-        json_field_result["uicolor"]['color_item_dark'] = json_field['color_item_dark'];
-        json_field_result["uicolor"]['color_item_normal'] = json_field['color_item_normal'];
-
-        fs.writeFileSync(app_autosizn_file+'tmp.json',JSON.stringify(json_field));
-        fs.writeFileSync(app_autosizn_file+"temp_app.json",JSON.stringify(json_field_result));
-        // json对象转化成字符串
-        console.log('数据传送完毕')
-
-    	result.title="新闻客户端定制服务";
-        res.render('afterUpload', result);
+        // console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')
     });
     req.pipe(req.busboy);
 };

@@ -118,31 +118,33 @@
                 <div class="form-field-outer">
                     <label for="_frm-iconform-name">是否支持视频</label>
                     <div class="form-field-container">
-                        <div id="vedio" value=true>
-                            <lable class="radio_on_left" onclick=radio_check(true,"vedio")>ON</lable>
-                            <lable class="radio_off_right" onclick=radio_check(false,"vedio")>OFF</lable>
-                        </div>
+                        <label id="vedio_tmp" for="vedio" value=true>
+                            <lable class="radio_on_left" onclick=radio_check(true,"vedio_tmp","vedio")>ON</lable>
+                            <lable class="radio_off_right" onclick=radio_check(false,"vedio_tmp","vedio")>OFF</lable>
+                        </label>
                     </div>
+                    <input id="vedio"  name="vedio"  type="hidden" value=true />
                 </div>
                 <div class="form-field-outer">
                     <label for="_frm-iconform-name">是否支持音频</label>
                     <div class="form-field-container">
-                        <div id="audio" value=true>
-                            <lable class="radio_on_left" onclick=radio_check(true,"audio")>ON</lable>
-                            <lable class="radio_off_right" onclick=radio_check(false,"audio")>OFF</lable>
-                        </div>
+                        <label id="audio_tmp" for = "audio">
+                            <lable class="radio_on_left" onclick=radio_check(true,"audio_tmp","audio")>ON</lable>
+                            <lable class="radio_off_right" onclick=radio_check(false,"audio_tmp","audio")>OFF</lable>
+                        </label>
                     </div>
+                    <input id="audio" name="audio" type="hidden" value=true />
                 </div>
                 <div class="form-field-outer">
                     <label for="_frm-iconform-name">是否支持分享</label>
 
 
-                    <div class="form-field-container" id="socials">
-                        <div id="social" value=true style="margin-bottom:15px">
-                            <lable class="radio_on_left" onclick=socel_click(true,"social","socials")>ON</lable>
-                            <lable class="radio_off_right" onclick=socel_click(false,"social","socials")>OFF</lable>
-                        </div>
-
+                    <div class="form-field-container" id="socials_all">
+                        <label id="social_tmp" for="social" style="margin-bottom:15px">
+                            <lable class="radio_on_left" onclick=socel_click(true,"social_tmp","socials_all","social")>ON</lable>
+                            <lable class="radio_off_right" onclick=socel_click(false,"social_tmp","socials_all","social")>OFF</lable>
+                        </label>
+                        <input id="social" name="social" type="hidden" value=true />
 
                         <label>
                             <lable_text>wx_key</lable_text>
@@ -199,19 +201,19 @@
                     <div class="form-field-container">
                         <label>
                             <lable_text>colorPrimary</lable_text>
-                            # <input type="text" value="33b5e5" id="colorPrimary"></label>
+                            # <input type="text" value="33b5e5" name="colorPrimary"></label>
                         <label>
                             <lable_text>colorPrimaryDark</lable_text>
-                            # <input type="text" value="33b5e5" id="colorPrimaryDark"></label>
+                            # <input type="text" value="33b5e5" name="colorPrimaryDark"></label>
                         <label>
                             <lable_text>colorAccent</lable_text>
-                            # <input type="text" value="33b5e5" id="colorAccent"></label>
+                            # <input type="text" value="33b5e5" name="colorAccent"></label>
                         <label>
                             <lable_text>color_item_dark</lable_text>
-                            # <input type="text" value="33b5e5" id="color_item_dark"></label>
+                            # <input type="text" value="33b5e5" name="color_item_dark"></label>
                         <label>
                             <lable_text>color_item_normal</lable_text>
-                            # <input type="text" value="33b5e5" id="color_item_normal"></label>
+                            # <input type="text" value="33b5e5" name="color_item_normal"></label>
                     </div>
                 </div>
                 <div class="form-field-outer">
