@@ -87,23 +87,27 @@ var initAutoSign = function(){
     file_ic_launcher  = false;
 };
 
+
 //执行自动签名的脚本
 var exceAutoSign = function(){
-    console.log('开始执行自动化脚本')
+    var jiaoben = app_autosizn_file+"GenerateApp.py "+ app_autosizn_file+"temp_app.json "+app_autosizn_file+"config.gradle.template";
+    // var jiaoben = 'python '+app_autosizn_file+"autosign.py"
+    console.log('开始执行自动化脚本'+jiaoben)
+
     var exec = child_process.exec;
-    exec('python '+app_autosizn_file+"autosign.py",function(error,stdout,stderr){
-         if(stdout.length >1){
-             console.log('you offer args:',stdout);
-         } else {
-             console.log('you don\'t offer args');
-         }
-         if(error) {
+    exec(jiaoben,function(error,stdout,stderr){
+        if(stdout.length >1){
+            console.log('you offer args:',stdout);
+        } else {
+            console.log('you don\'t offer args');
+        }
+        if(error) {
             console.info('stderr : '+stderr);
             fs.writeFileSync(app_autosizn_file+"str","1");
-         }else{
+        }else{
             console.log('apk is sucess');
             fs.writeFileSync(app_autosizn_file+"str","0");
-         }
+        }
     });
 };
 
@@ -169,7 +173,7 @@ var handleForm = function(req, res) {
             json_field_result["debug_jpush_appkey"] = json_field['debug_jpush_appkey'];
             json_field_result["umeng_appkey"] = json_field['umeng_appkey'];
             json_field_result["audio"] = json_field['audio'];
-            json_field_result["vedio"] = json_field['vedio'];
+            json_field_result["video"] = json_field['video'];
 
             json_field_result["appicon"] = {};
             json_field_result["appicon"]['mipmap-xxhdpi'] = app_autosizn_file+"ic_launcher.png";

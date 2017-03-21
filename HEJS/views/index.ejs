@@ -88,8 +88,15 @@
 
 
                         <label>
-                            <lable_text>jpush_appkey</lable_text>
-                            <input id="jpush_appkey" name="jpush_appkey" placeholder="请输入jpush_appkey"
+                            <lable_text>debug_jpush_appkey</lable_text>
+                            <input id="debug_jpush_appkey" name="debug_jpush_appkey" placeholder="请输入debug_jpush_appkey"
+                                   value="aa123456789"
+                                   class="form-text ui-widget ui-widget-content ui-autocomplete-input ui-corner-all"
+                                   type="text"></label>
+
+                        <label>
+                            <lable_text>release_jpush_appkey</lable_text>
+                            <input id="release_jpush_appkey" name="release_jpush_appkey" placeholder="请输入release_jpush_appkey"
                                    value="aa123456789"
                                    class="form-text ui-widget ui-widget-content ui-autocomplete-input ui-corner-all"
                                    type="text"></label>
@@ -118,12 +125,12 @@
                 <div class="form-field-outer">
                     <label for="_frm-iconform-name">是否支持视频</label>
                     <div class="form-field-container">
-                        <label id="vedio_tmp" for="vedio" value=true>
-                            <lable class="radio_on_left" onclick=radio_check(true,"vedio_tmp","vedio")>ON</lable>
-                            <lable class="radio_off_right" onclick=radio_check(false,"vedio_tmp","vedio")>OFF</lable>
+                        <label id="video_tmp" for="video" value=true>
+                            <lable class="radio_on_left" onclick=radio_check(true,"video_tmp","video")>ON</lable>
+                            <lable class="radio_off_right" onclick=radio_check(false,"video_tmp","video")>OFF</lable>
                         </label>
                     </div>
-                    <input id="vedio"  name="vedio"  type="hidden" value=true />
+                    <input id="video"  name="video"  type="hidden" value=true />
                 </div>
                 <div class="form-field-outer">
                     <label for="_frm-iconform-name">是否支持音频</label>
