@@ -1,7 +1,6 @@
 <% include resource/header.html %>
 <script src="/javascripts/jquery-3.1.1.js"></script>
 
-
 <script src="/javascripts/radio_click.js"></script>
 
 <script src="/javascripts/jquery.min.js"></script>
@@ -21,6 +20,7 @@
         reader.readAsDataURL(file.files[0]);
     }
 </script>
+
 <div class="container">
     <div class="starter-template">
 
@@ -30,14 +30,13 @@
 
 
         <div id="inputs">
-            <form role="form" id="addTaskForm" action="task/addTask" method="post" enctype="multipart/form-data">
+            <form role="form" id="addTaskForm" action="addTask" method="post" enctype="multipart/form-data">
                 <div class="form-field-outer">
                     <label for="_frm-iconform-name">应用名</label>
                     <div class="form-field-container">
                         <input id="appname" name="appname" placeholder="请输入应用名称" value="宜昌新闻"
                                class="form-text ui-widget ui-widget-content ui-autocomplete-input ui-corner-all"
                                type="text">
-                        <dy class="error"> *</dy>
                     </div>
                     <div class="form-field-help-text">
                         应用名称最好是中文，不能包含特殊字符，长度请控制在五个字符以内，不能为空
@@ -49,7 +48,6 @@
                         <input id="package" name="package" placeholder="package" value="com.cnhubei.ycxw"
                                class="form-text ui-widget ui-widget-content ui-autocomplete-input ui-corner-all"
                                type="text">
-                        <dy class="error"> *</dy>
                     </div>
                     <div class="form-field-help-text">
                         包名是客户端唯一标识，请以"com.cnhubei."开头，后面带上有意义的客户端表示。
@@ -110,15 +108,11 @@
                     <input type="file" name="ic_launcher" id="ic_launcher" accept="image/*"
                            onchange="selectImage(this,'image')" multiple="multiple">
                     <img src="/images/icon_default.png" name="image" id="image" border=0/>
-                    <dy class="error"> *</dy>
                     <div class="form-field-help-text">
                         <p>应用的图标要求为72*72的png图标。</p>
                         <p> 注：为了在6.0以上系统适配，图标避免使用渐变色和阴影</p>
                     </div>
                 </div>
-
-
-
 
 
                 <div class="form-field-outer">
@@ -140,7 +134,7 @@
                     </div>
                 </div>
                 <div class="form-field-outer">
-                    <label for="_frm-iconform-name">分享appkey设置</label>
+                    <label for="_frm-iconform-name">是否支持分享</label>
 
 
                     <div class="form-field-container" id="socials">
@@ -189,12 +183,11 @@
                     </div>
                 </div>
 
-                <div class="form-field-outer" id = "share_icon">
-                    <label for="_frm-iconform-name">第三方分享默认图标</label>
+                <div class="form-field-outer" id="share_icon">
+                    <label for="_frm-iconform-name">分享默认图标</label>
                     <input type="file" name="shareicon" id="shareicon" accept="image/*"
                            onchange="selectImage(this,'iamge_share')" multiple="multiple">
                     <img src="/images/icon_default.png" name="iamge_share" id="iamge_share" border=0/>
-                    <dy class="error"> *</dy>
                     <div class="form-field-help-text">
                         <p>应用的图标要求为72*72的png图标。</p>
                         <p> 注：为了在6.0以上系统适配，图标避免使用渐变色和阴影</p>

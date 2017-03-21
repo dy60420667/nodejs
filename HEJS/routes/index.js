@@ -52,30 +52,26 @@ var isDefined = function(str) {
 
 //初始化Python脚本
 var initAutoSign = function(){
-    fs.unlink(app_autosizn_file+'ic_launcher.png',function(err) {
-       if (err) {
-           return console.error("提示："+err);
-       }
-       console.log("ic_launcher.png文件删除成功！");
-    });
-    fs.unlink(app_autosizn_file+'shareicon.png',function(err) {
-        if (err) {
-            return console.error("提示："+err);
-        }
-        console.log("shareicon.png文件删除成功！");
-    });
-    fs.unlink(app_autosizn_file+'tmp.json',function(err) {
-       if (err) {
-           return console.error("提示："+err);
-       }
-       console.log("tmp.json文件删除成功！");
-    });
-    fs.unlink(app_autosizn_file+'str',function(err) {
-       if (err) {
-           return console.error("提示："+err);
-       }
-       console.log("str文件删除成功！");
-    }); 
+    try{
+        fs.unlinkSync(app_autosizn_file+'ic_launcher.png');
+    }catch (err){
+        console.log(err)
+    }
+    try{
+        fs.unlinkSync(app_autosizn_file+'shareicon.png');
+    }catch (err){
+        console.log(err)
+    }
+    try{
+        fs.unlinkSync(app_autosizn_file+'tmp.json');
+    }catch (err){
+        console.log(err)
+    }
+    try{
+        fs.unlinkSync(app_autosizn_file+'str');
+    }catch (err){
+        console.log(err)
+    }
 };
 
 //执行自动签名的脚本
@@ -128,13 +124,9 @@ var handleForm = function(req, res) {
     if(fileapk!=null){
         fileapk.unpipe(res);
     }
-
     var result = { files: [], fields: [] };
-
     var json_field = {};//接收到的json数据收集，用以缓存Json文件
-
     var json_field_result={};
-
 
     req.busboy.on('file', function (fieldname, file, filename) {
         console.log("file:fieldname,"+fieldname+",file:"+file+",filename:"+filename)
@@ -150,6 +142,7 @@ var handleForm = function(req, res) {
         json_field[key] = value;
     });
     req.busboy.on('finish', function() {
+        console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')
         json_field_result["appname"] = json_field['appname'];
         json_field_result["versionname"] = json_field['versionname'];
         json_field_result["versioncode"] = json_field['versioncode'];
@@ -181,7 +174,6 @@ var handleForm = function(req, res) {
         json_field_result["uicolor"]['color_item_dark'] = json_field['color_item_dark'];
         json_field_result["uicolor"]['color_item_normal'] = json_field['color_item_normal'];
 
-
         fs.writeFileSync(app_autosizn_file+'tmp.json',JSON.stringify(json_field));
         fs.writeFileSync(app_autosizn_file+"temp_app.json",JSON.stringify(json_field_result));
         // json对象转化成字符串
@@ -193,12 +185,11 @@ var handleForm = function(req, res) {
     req.pipe(req.busboy);
 };
 
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
-    console.log('get')
     res.render('index', { title: '新闻客户端定制服务' });
 });
-
 
 router.post('/addTask', handleForm);
 router.get('/getstr', handleGetStr);
