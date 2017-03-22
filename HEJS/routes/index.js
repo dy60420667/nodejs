@@ -49,7 +49,7 @@ var handleFile = function(fieldname,file,filename) {
         if(fieldname=='ic_launcher'){
             file_ic_launcher = 1;
         }
-        if(fieldname=='shareicon'){
+        if(fieldname=='share_icon'){
             file_share_icon = 1;
         }
 
@@ -81,7 +81,7 @@ var initAutoSign = function(){
         console.log(err)
     }
     try{
-        fs.unlinkSync(app_autosizn_file+'shareicon.png');
+        fs.unlinkSync(app_autosizn_file+'share_icon.png');
     }catch (err){
         console.log(err)
     }
@@ -206,7 +206,7 @@ var handleForm = function(req, res) {
             }else{
                 // json_field_result["social"] = json_field['social'];
                 json_field_result["socialize"] = {};
-                json_field_result["socialize"]['shareicon'] = app_autosizn_file+"shareicon.png";
+                json_field_result["socialize"]['share_icon'] = app_autosizn_file+"share_icon.png";
                 json_field_result["socialize"]['wx_key'] = json_field['wx_key'];
                 json_field_result["socialize"]['wx_secret'] = json_field['wx_secret'];
                 json_field_result["socialize"]['qq_id'] = json_field['qq_id'];
