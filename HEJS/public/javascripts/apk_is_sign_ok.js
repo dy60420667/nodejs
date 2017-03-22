@@ -3,7 +3,7 @@ var myVar,index = 0 ;
 function startTimer(){ 
     timestart_apk_is_sign_ok =0;
     timeend_apk_is_sign_ok =0;
-    myVar=setInterval(function(){myTimer()},5000);
+    myVar=setInterval(function(){myTimer()},1000);
 }
 var timestart_apk_is_sign_ok =0;
 var timeend_apk_is_sign_ok =0;
@@ -73,8 +73,6 @@ function doTimeOut(){
 }
 
 function doNormal(){
-    var d=new Date();
-    var t=d.toLocaleTimeString();
     index =index%7;
     index++;
     var cars=["","打","包","中",".",".","."];
@@ -82,9 +80,13 @@ function doNormal(){
     for (var i=0;i<index;i++){
         text +=cars[i];
     }
-    document.getElementById("result").innerHTML='请耐心等待。'+text+"\n"+getLocalTime();
-    document.getElementById("down_debug").style.display = "none";
-    document.getElementById("down_release").style.display = "none";
+    document.getElementById("result").innerHTML='请请耐心等待。后台'+text;
+    document.getElementById("down_debug").innerHTML = "当前时间："+getLocalTime();
+
+    timeend_apk_is_sign_ok = getCurrentTime()
+    document.getElementById("down_release").innerHTML= "已耗时:"+(timeend_apk_is_sign_ok-timestart_apk_is_sign_ok );
+    document.getElementById("down_debug").style.display = "block";
+    document.getElementById("down_release").style.display = "block";
 
     checkTimeOut();
 }
