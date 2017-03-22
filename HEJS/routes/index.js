@@ -7,12 +7,24 @@ var router = express.Router();
 var app_autosizn_file = "D:/CodeGen/tmp/";//自动签名文件存放位置
 var app_jiaoben = "D:/CodeGen/"
 
-var file_share_icon = false;//分心的图片是否上传成功
-var file_ic_launcher = false;//icon是否上传陈宫
-var source_isok = false;//数据是否上传成功
+//0表示数据初始状态，-1表示数据未上传，1表示上传成功
+var file_share_icon = 0;//分心的图片是否上传成功
+var file_ic_launcher = 0;//icon是否上传陈宫
+var source_isok = 0;//数据是否上传成功
 
+function isAllOk() {
+    if(source_isok!=1){
+        return false;
+    }
+    if(file_ic_launcher!=1){
+        return false;
+    }
 
-
+    if(file_share_icon==0){
+        return false;
+    }
+    return true;
+}
 
 
 //处理上传的图片
@@ -35,25 +47,21 @@ var handleFile = function(fieldname,file,filename) {
     });
     fstream.on('close', function () {
         if(fieldname=='ic_launcher'){
-            file_ic_launcher = true;
+            file_ic_launcher = 1;
         }
-        if(fieldname=='share_icon'){
-            file_share_icon = true;
+        if(fieldname=='shareicon'){
+            file_share_icon = 1;
         }
 
         console.log('文件传送完毕')
         console.log('Saved file: '+targetFile);
         //开始执行自动化脚本
 
-        var tmp_json=app_autosizn_file+'tmp.json'; // filespec="C:/path/myfile.txt"
-
-        fs.exists(tmp_json, function(exists) {
-            if(exists&&file_ic_launcher&&file_share_icon&&source_isok){
-                exceAutoSign();
-            }else{
-                console.log('文件不存在或者资源没有全部上传')
-            }
-        });
+        if(isAllOk()){
+            exceAutoSign();
+        }else{
+            console.log('文件不存在或者资源没有全部上传')
+        }
     });
     fstream.on('error', function () {
         console.log('ERROR while saving file: '+filename);
@@ -88,9 +96,9 @@ var initAutoSign = function(){
         console.log(err)
     }
 
-    file_share_icon = false;
-    file_ic_launcher  = false;
-    source_isok = false;
+    file_share_icon = 0;
+    file_ic_launcher  = 0;
+    source_isok = 0;
 };
 
 
@@ -192,10 +200,9 @@ var handleForm = function(req, res) {
             json_field_result["appicon"] = {};
             json_field_result["appicon"]['mipmap-xxhdpi'] = app_autosizn_file+"ic_launcher.png";
 
-
             console.log("json_field[social]"+json_field['social'])
-            if(json_field['social']='false'){
-                file_share_icon = true;
+            if(json_field['social']=='false'){
+                file_share_icon = -1;
             }else{
                 // json_field_result["social"] = json_field['social'];
                 json_field_result["socialize"] = {};
@@ -207,7 +214,6 @@ var handleForm = function(req, res) {
                 json_field_result["socialize"]['sina_key'] = json_field['sina_key'];
                 json_field_result["socialize"]['sina_secret'] = json_field['sina_secret'];
             }
-
 
             json_field_result["uicolor"] = {};
             json_field_result["uicolor"]['colorPrimary'] ="#" + json_field['colorPrimary'];
@@ -225,13 +231,13 @@ var handleForm = function(req, res) {
             result.title="新闻客户端定制服务";
             res.render('afterUpload', result);
 
-            source_isok = true;
-
-            if(file_ic_launcher&&file_share_icon&&source_isok){
+            source_isok = 1;
+            if(isAllOk()){
                 exceAutoSign();
             }else{
                 console.log('文件不存在或者资源没有全部上传')
             }
+
         }
     });
     req.busboy.on('finish', function() {
@@ -239,7 +245,6 @@ var handleForm = function(req, res) {
     });
     req.pipe(req.busboy);
 };
-
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
