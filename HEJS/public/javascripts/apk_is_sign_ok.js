@@ -5,9 +5,12 @@ function startTimer(){
     timeend_apk_is_sign_ok =0;
     myVar=setInterval(function(){myTimer()},1000);
 }
+//服务开始时间
 var timestart_apk_is_sign_ok =0;
+//服务结束时间
 var timeend_apk_is_sign_ok =0;
-var timeout_apk_is_sign_ok = 20*60*10000;
+//超时时间5分钟
+var timeout_apk_is_sign_ok = 5*60*1000;
 
 /* 定义一个得到本地时间的函数*/
 function myTimer(){
@@ -52,6 +55,8 @@ function doOK(){
     stopTimer();
     document.getElementById("result_1").innerHTML='';
     document.getElementById("result").innerHTML='';
+    document.getElementById("down_debug").innerHTML = "打包成功，点击下载测试包";
+    document.getElementById("down_debug").innerHTML = "打包成功，点击下载正式包";
     document.getElementById("down_debug").style.display = "block";
     document.getElementById("down_release").style.display = "block";
 }
@@ -60,8 +65,6 @@ function doError(){
     stopTimer();
     document.getElementById("result_1").innerHTML='打包出现异常，请重新提交';
     document.getElementById("result").innerHTML='';
-    document.getElementById("down_debug").style.display = "none";
-    document.getElementById("down_release").style.display = "none";
 }
 
 function doTimeOut(){
@@ -84,7 +87,7 @@ function doNormal(){
     document.getElementById("down_debug").innerHTML = "当前时间："+getLocalTime();
 
     timeend_apk_is_sign_ok = getCurrentTime()
-    document.getElementById("down_release").innerHTML= "已耗时:"+(timeend_apk_is_sign_ok-timestart_apk_is_sign_ok );
+    document.getElementById("down_release").innerHTML= "已耗时:"+formatTime(timeend_apk_is_sign_ok-timestart_apk_is_sign_ok );
     document.getElementById("down_debug").style.display = "block";
     document.getElementById("down_release").style.display = "block";
 
@@ -98,6 +101,14 @@ function checkTimeOut(){
     if(timeend_apk_is_sign_ok-timestart_apk_is_sign_ok >= timeout_apk_is_sign_ok){
         doTimeOut();
     }
+}
+
+
+function formatTime(time) {
+    time   = time/1000;
+    var time_second = parseInt(time%60);
+    var time_munite = parseInt(time/60);
+    return time_munite+"分钟"+time_second+"秒"
 }
 
 function getLocalTime() {

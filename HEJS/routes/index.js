@@ -7,8 +7,12 @@ var router = express.Router();
 var app_autosizn_file = "D:/CodeGen/tmp/";//自动签名文件存放位置
 var app_jiaoben = "D:/CodeGen/"
 
-var file_share_icon = false;
-var file_ic_launcher = false;
+var file_share_icon = false;//分心的图片是否上传成功
+var file_ic_launcher = false;//icon是否上传陈宫
+var source_isok = false;//数据是否上传成功
+
+
+
 
 
 //处理上传的图片
@@ -44,10 +48,10 @@ var handleFile = function(fieldname,file,filename) {
         var tmp_json=app_autosizn_file+'tmp.json'; // filespec="C:/path/myfile.txt"
 
         fs.exists(tmp_json, function(exists) {
-            if(exists&&file_ic_launcher&&file_share_icon){
+            if(exists&&file_ic_launcher&&file_share_icon&&source_isok){
                 exceAutoSign();
             }else{
-                console.log('文件不存在')
+                console.log('文件不存在或者资源没有全部上传')
             }
         });
     });
@@ -86,12 +90,13 @@ var initAutoSign = function(){
 
     file_share_icon = false;
     file_ic_launcher  = false;
+    source_isok = false;
 };
 
 
 //执行自动签名的脚本
 var exceAutoSign = function(){
-    var jiaoben = app_jiaoben+"GenerateApp.py "+ app_autosizn_file+"temp_app.json "+app_jiaoben+"config.gradle.template";
+    var jiaoben = "python "+app_jiaoben+"GenerateApp.py "+ app_autosizn_file+"temp_app.json "+app_jiaoben+"config.gradle.template";
     // var jiaoben = 'python '+app_autosizn_file+"autosign.py"
     console.log('开始执行自动化脚本'+jiaoben)
 
@@ -170,7 +175,7 @@ var handleForm = function(req, res) {
         json_field[key] = value;
         
         if(key=="intro"){
-            console.log(json_field)
+            console.log("json_field:"+json_field)
 
             json_field_result["appname"] = json_field['appname'];
             json_field_result["versionname"] = json_field['versionname'];
@@ -188,6 +193,7 @@ var handleForm = function(req, res) {
             json_field_result["appicon"]['mipmap-xxhdpi'] = app_autosizn_file+"ic_launcher.png";
 
 
+            console.log("json_field[social]"+json_field['social'])
             if(json_field['social']='false'){
                 file_share_icon = true;
             }else{
@@ -218,6 +224,14 @@ var handleForm = function(req, res) {
 
             result.title="新闻客户端定制服务";
             res.render('afterUpload', result);
+
+            source_isok = true;
+
+            if(file_ic_launcher&&file_share_icon&&source_isok){
+                exceAutoSign();
+            }else{
+                console.log('文件不存在或者资源没有全部上传')
+            }
         }
     });
     req.busboy.on('finish', function() {
