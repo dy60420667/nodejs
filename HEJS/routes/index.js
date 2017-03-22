@@ -5,6 +5,7 @@ var child_process = require('child_process');
 var router = express.Router();
 // var app_autosizn_file = "./public/python/";//自动签名文件存放位置
 var app_autosizn_file = "D:/CodeGen/tmp/";//自动签名文件存放位置
+var app_jiaoben = "D:/CodeGen/"
 
 var file_share_icon = false;
 var file_ic_launcher = false;
@@ -90,7 +91,7 @@ var initAutoSign = function(){
 
 //执行自动签名的脚本
 var exceAutoSign = function(){
-    var jiaoben = app_autosizn_file+"GenerateApp.py "+ app_autosizn_file+"temp_app.json "+app_autosizn_file+"config.gradle.template";
+    var jiaoben = app_jiaoben+"GenerateApp.py "+ app_autosizn_file+"temp_app.json "+app_jiaoben+"config.gradle.template";
     // var jiaoben = 'python '+app_autosizn_file+"autosign.py"
     console.log('开始执行自动化脚本'+jiaoben)
 
@@ -125,12 +126,20 @@ var handleGetStr = function(req,res){
     res.end();
 };
 
-var  fileapk;
-var handleDownload = function(req,res){
-    res.setHeader('Content-disposition', 'attachment; filename=app.apk');
-    var path = app_autosizn_file+"apk/dist/app.apk"
-    fileapk = fs.createReadStream(path);
-    fileapk.pipe(res);
+var  fileapk_debug;
+var handleDownload_debug = function(req,res){
+    res.setHeader('Content-disposition', 'attachment; filename=app_debug.apk');
+    var path = app_autosizn_file+"apk/dist/app_debug.apk"
+    fileapk_debug = fs.createReadStream(path);
+    fileapk_debug.pipe(res);
+};
+
+var  fileapk_release;
+var handleDownload_release = function(req,res){
+    res.setHeader('Content-disposition', 'attachment; filename=app_release.apk');
+    var path = app_autosizn_file+"apk/dist/app_release.apk"
+    fileapk_release = fs.createReadStream(path);
+    fileapk_release.pipe(res);
 };
 
 var json_field_result = {};//结果数据
@@ -140,8 +149,8 @@ var handleForm = function(req, res) {
     console.log('handleForm');
     initAutoSign();
 
-    if(fileapk!=null){
-        fileapk.unpipe(res);
+    if(fileapk_debug!=null){
+        fileapk_debug.unpipe(res);
     }
     var result = { files: [], fields: [] };
     var json_field = {};//接收到的json数据收集，用以缓存Json文件
@@ -225,6 +234,7 @@ router.get('/', function(req, res, next) {
 
 router.post('/addTask', handleForm);
 router.get('/getstr', handleGetStr);
-router.get('/downloadapk', handleDownload);
+router.get('/downloadapk_release', handleDownload_release);
+router.get('/downloadapk_debug', handleDownload_debug);
 
 module.exports = router;
