@@ -56,7 +56,7 @@ function doOK(){
     document.getElementById("result_1").innerHTML='';
     document.getElementById("result").innerHTML='';
     document.getElementById("down_debug").innerHTML = "打包成功，点击下载测试包";
-    document.getElementById("down_debug").innerHTML = "打包成功，点击下载正式包";
+    document.getElementById("down_release").innerHTML = "打包成功，点击下载正式包";
     document.getElementById("down_debug").style.display = "block";
     document.getElementById("down_release").style.display = "block";
 }
