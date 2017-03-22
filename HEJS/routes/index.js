@@ -141,16 +141,16 @@ var handleGetStr = function(req,res){
 
 var  fileapk_debug;
 var handleDownload_debug = function(req,res){
-    res.setHeader('Content-disposition', 'attachment; filename=app_debug.apk');
-    var path = app_jiaoben+"code/app/build/outputs/apk/app_debug.apk"
+    res.setHeader('Content-disposition', 'attachment; filename=app-debug.apk');
+    var path = app_jiaoben+"code/app/build/outputs/apk/app-debug.apk"
     fileapk_debug = fs.createReadStream(path);
     fileapk_debug.pipe(res);
 };
 // D:\CodeGen\code\app\build\outputs\apk
 var  fileapk_release;
 var handleDownload_release = function(req,res){
-    res.setHeader('Content-disposition', 'attachment; filename=app_release.apk');
-    var path = app_jiaoben+"code/app/build/outputs/apk/app_release.apk"
+    res.setHeader('Content-disposition', 'attachment; filename=app-release.apk');
+    var path = app_jiaoben+"code/app/build/outputs/apk/app-release.apk"
     fileapk_release = fs.createReadStream(path);
     fileapk_release.pipe(res);
 };
