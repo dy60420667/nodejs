@@ -10,7 +10,7 @@ var timestart_apk_is_sign_ok =0;
 //服务结束时间
 var timeend_apk_is_sign_ok =0;
 //超时时间5分钟
-var timeout_apk_is_sign_ok = 5*60*1000;
+var timeout_apk_is_sign_ok = 10*60*1000;
 
 /* 定义一个得到本地时间的函数*/
 function myTimer(){
